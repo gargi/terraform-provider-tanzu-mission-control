@@ -1,0 +1,91 @@
+# https://github.com/golangci/golangci-lint#config-file
+
+linters:
+  # please, do not use `enable-all`: it's deprecated and will be removed soon.
+  # inverted configuration with `enable-all` and `disable` is not scalable during updates of golangci-lint
+  disable-all: true
+  enable:
+    - asciicheck
+    - bodyclose
+    - depguard
+    - dogsled
+    - dupl
+    - errcheck
+    - exportloopref
+    - funlen
+    - goconst
+    - gocognit
+    - gocritic
+    - gocyclo
+    - godot
+    - gofmt
+    - goimports
+    - goprintffuncname
+    - gosec
+    - gosimple
+    - govet
+    - ineffassign
+    - misspell
+    - nakedret
+    - nestif
+    - prealloc
+    - staticcheck
+    - stylecheck
+    - typecheck
+    - unconvert
+    - unparam
+    - unused
+    - whitespace
+    - wsl
+
+#   don't enable:
+#   - deadcode
+#   - exhaustive
+#   - gochecknoglobals
+#   - godox
+#   - gomnd
+#   - goerr113
+#   - gofumpt
+#   - interfacer
+#   - lll
+#   - maligned
+#   - nlreturn
+#   - noctx
+#   - nolintlint
+#   - rowserrcheck
+#   - scopelint
+#   - structcheck
+#   - testpackage
+#   - revive
+#   - varcheck
+
+run:
+  # include test files or not, default is true
+  tests: true
+  deadline: 5m
+
+linters-settings:
+  funlen:
+    lines: 150
+    statements: 100
+  nestif:
+    min-complexity: 14
+  gocognit:
+    min-complexity: 60
+  goimports:
+    local-prefixes: github.com/vmware/terraform-provider-tanzu-mission-control
+
+issues:
+  exclude-rules:
+    - path: _test\.go
+      linters:
+        - dogsled
+        - funlen
+        - gocognit
+    - path: internal/authctx
+      linters:
+        - gosec
+        - nestif
+    - path: flatten_test.go
+      linters:
+        - dupl

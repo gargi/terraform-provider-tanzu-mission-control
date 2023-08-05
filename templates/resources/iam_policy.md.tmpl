@@ -1,0 +1,66 @@
+---
+Title: "IAM Policy Resource"
+Description: |-
+    Creating the Tanzu Kubernetes IAM policy resource.
+---
+
+# IAM Policy
+
+The `tanzu-mission-control_iam_policy` resource allows you to add, update, and delete role bindings to a particular scope for identity and access management through Tanzu Mission Control.
+
+IAM policy (also known as Access Management) allows you to implement role-based access control (RBAC) in Tanzu Mission Control. For more information, see [Access Control.][access-control]
+
+[access-control]: https://docs.vmware.com/en/VMware-Tanzu-Mission-Control/services/tanzumc-concepts/GUID-EB9C6D83-1132-444F-8218-F264E43F25BD.html
+
+## Policy Scope and Inheritance
+
+In the Tanzu Mission Control resource hierarchy, there are three levels and five object types at which you can specify IAM policy resources:
+- **organization** - `organization` block under `scope` sub-resource
+- **object groups** - `cluster_group` or `workspace` block under `scope` sub-resource
+- **Kubernetes objects** - `cluster` or `namespace` block under `scope` sub-resource
+
+In addition to the direct policy defined for a given object, each object has inherited policies described in the parent objects. For example, a cluster has a direct policy and inherited policies from the cluster group and organization to which it is attached.
+Similarly, a namespace has a direct policy and inherited policies from the workspace with which it is associated.
+
+**Note:**
+The scope parameter is mandatory in the schema and the user needs to add one of the defined scopes to the script for the provider to function.
+Only one scope per resource is allowed.
+
+## Managing Access to Your Resources
+
+To use the **Tanzu Mission Control provider** for adding, editing, and removing role bindings, you must define who has access to each resource in your organization using role-based access control.
+For more information, see [Managing Access to Resources.][managing-access]
+
+[managing-access]: https://docs.vmware.com/en/VMware-Tanzu-Mission-Control/services/tanzumc-using/GUID-CA5A31BC-4D7B-4EDD-A4C8-95BEEC08F7C4.html
+
+## Organization scoped IAM Policy
+
+### Example Usage
+
+{{ tffile "examples/resources/iam_policy/resource_iam_org.tf" }}
+
+## Cluster group scoped IAM Policy
+
+### Example Usage
+
+{{ tffile "examples/resources/iam_policy/resource_iam_cluster_group.tf" }}
+
+## Cluster scoped IAM Policy
+
+### Example Usage
+
+{{ tffile "examples/resources/iam_policy/resource_iam_cluster.tf" }}
+
+## Workspace scoped IAM Policy
+
+### Example Usage
+
+{{ tffile "examples/resources/iam_policy/resource_iam_workspace.tf" }}
+
+## Namespace scoped IAM Policy
+
+### Example Usage
+
+{{ tffile "examples/resources/iam_policy/resource_iam_namespace.tf" }}
+
+{{ .SchemaMarkdown | trimspace }}

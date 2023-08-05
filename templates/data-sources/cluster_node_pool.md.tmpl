@@ -1,0 +1,18 @@
+---
+Title: "Node Pool Resource"
+Description: |-
+    Fetching the details of node pool resource.
+---
+
+# Node pool
+
+Create, delete, and update node pools for your clusters using this Terraform module.
+
+For clusters that you create in Tanzu Mission Control, you can define a pool of worker nodes on which your workloads can run
+because Tanzu Mission Control cannot provision additional resources in a cluster that is created elsewhere and subsequently attached, you cannot create a node pool in an attached cluster.
+
+## Example Usage
+
+{{ tffile "examples/data-sources/cluster_node_pool/data-source.tf" }}
+
+{{ .SchemaMarkdown | trimspace }}
